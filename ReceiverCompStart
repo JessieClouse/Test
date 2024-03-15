@@ -1,0 +1,21 @@
+//Receiver code for competition start (testing purposes)
+
+#include <SoftwareSerial.h>
+
+SoftwareSerial APC220(10, 11); // RX, TX pin configuration for APC220
+
+void setup() {
+  Serial.begin(9600); // Start serial communication for debugging
+  APC220.begin(9600); // Initialize the APC220 with the same baud rate as the transmitter
+}
+
+void loop() {
+  if(APC220.available()) { // Check if data is available to read
+    String incoming = APC220.readString(); // Read the incoming string
+    
+    // Debug print the incoming message
+    Serial.println(incoming);
+
+    // Here you can add any response to the "COMPETITION_START" message
+  }
+}
