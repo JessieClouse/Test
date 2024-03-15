@@ -1,0 +1,17 @@
+// Transmitter code for Competition Start (testing purposes)
+
+#include <SoftwareSerial.h>  //software for serial communication
+
+SoftwareSerial APC220(10, 11); //RX, TX pin configuration for APC220
+
+void setup() {
+  APC220.begin(9600); // Initialize the APC220 with the same baud rate as the receiver
+}
+
+void loop() {
+  // Send the competition start signal
+  APC220.print("COMPETITION_START");
+
+  // Add a delay to prevent constant sending (for testing purposes)
+  delay(5000); // Delay for 5 seconds before sending the signal again
+}
