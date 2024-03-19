@@ -1,3 +1,9 @@
+//FOR ROCK-IT BOT:
+// Black - Ground
+// Red - VCC
+// White - APC RX to Mega TX (18) 
+// Green - APC TX to Mega RX (19)
+//
 //Receiver Competition Start (Adjusted to work for Mega instead of UNO)
 //APC RX to Mega TX (18)
 //APC TX to Mega RX (19)
