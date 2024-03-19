@@ -1,3 +1,9 @@
+//FOR Wall-IEE:
+// Gray - Ground
+// Orange - VCC
+// Yellow - APC RX to Mega TX (18) 
+// Blue - APC TX to Mega RX (19)
+//
 // Transmitter code for Competition Start (testing purposes)
 //APC TX connects to Mega's RX (19)
 //APC RX connects to Mega's TX (18)
