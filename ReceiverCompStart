@@ -1,21 +1,29 @@
-//Receiver code for competition start (testing purposes)
+//Receiver Competition Start (Adjusted to work for Mega instead of UNO)
+//APC RX to Mega TX (18)
+//APC TX to Mega RX (19)
 
-#include <SoftwareSerial.h>
 
-SoftwareSerial APC220(10, 11); // RX, TX pin configuration for APC220
+bool startMessageReceived = false; // Flag to ensure message is processed only once
 
 void setup() {
   Serial.begin(9600); // Start serial communication for debugging
-  APC220.begin(9600); // Initialize the APC220 with the same baud rate as the transmitter
+  Serial1.begin(9600); // Initialize Serial1 for communication with APC220
 }
 
 void loop() {
-  if(APC220.available()) { // Check if data is available to read
-    String incoming = APC220.readString(); // Read the incoming string
+  if (!startMessageReceived && Serial1.available()) { // Check if message hasn't been received and data is available
+    String incoming = Serial1.readStringUntil('\n'); // Read the incoming string until newline
+    incoming.trim(); // Trim whitespace
     
     // Debug print the incoming message
     Serial.println(incoming);
 
-    // Here you can add any response to the "COMPETITION_START" message
+    if (incoming == "COMPETITION_START") {
+      // Here you can add any response to the "COMPETITION_START" message
+      // This is where you handle the message
+
+      startMessageReceived = true; // Set flag to true to avoid processing further messages
+    }
   }
+  // The loop continues running, but no further action is taken once the message is received.
 }
