@@ -1,17 +1,26 @@
 // Transmitter code for Competition Start (testing purposes)
+//APC TX connects to Mega's RX (19)
+//APC RX connects to Mega's TX (18)
 
-#include <SoftwareSerial.h>  //software for serial communication
 
-SoftwareSerial APC220(10, 11); //RX, TX pin configuration for APC220
+bool startMessageSent = false; // Flag to track if the message has been sent
 
 void setup() {
-  APC220.begin(9600); // Initialize the APC220 with the same baud rate as the receiver
+  Serial1.begin(9600); // Initialize Serial1 for communication with APC220
 }
 
 void loop() {
-  // Send the competition start signal
-  APC220.print("COMPETITION_START");
+  // Check if the message has not yet been sent
+  if (!startMessageSent) {
+    competitionStartSent(); // Send the competition start message
+    startMessageSent = true; // Set the flag to true to avoid resending the message
+  }
 
-  // Add a delay to prevent constant sending (for testing purposes)
-  delay(5000); // Delay for 5 seconds before sending the signal again
+  // The loop does nothing after sending the message once, but you can add other tasks here
+}
+
+// Function to send the competition start message
+void competitionStartSent() {
+  Serial1.println("COMPETITION_START"); // Send the message over Serial1
+  // Optionally, you can include other actions here that need to occur right after sending the start message
 }
