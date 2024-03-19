@@ -1,0 +1,35 @@
+//Receive Comp End
+//APC RX to Mega TX (18)
+//APC TX to Mega RX (19)
+
+
+
+bool endMessageReceived = false; // Flag to track if the end message has been received
+
+void setup() {
+  Serial.begin(9600); // Start serial communication to print the received message
+  Serial1.begin(9600); // Initialize serial communication with the APC220 module on Serial1
+}
+
+void loop() {
+  if (!endMessageReceived && Serial1.available()) { // Check if data is available to read from Serial1 and message hasn't been received yet
+    String incomingMessage = Serial1.readStringUntil('\n'); // Read the incoming message until a newline character
+    incomingMessage.trim(); // Trim any whitespace or newline characters
+
+    // Check if the incoming message is the one we're looking for
+    if (incomingMessage.equals("We are pressing the button now")) {
+      // Action to take when the specific message is received
+      competitionEndReceived();
+      endMessageReceived = true; // Set the flag to true to prevent processing the message again
+    }
+  }
+
+  // The rest of the loop can contain other logic that runs regardless of the message reception
+  // But the specific action tied to receiving the "We are pressing the button now" message will only happen once
+}
+
+// Function to process the received message
+void competitionEndReceived() {
+  Serial.println("Message received: We are pressing the button now");//this was a debug message, can be removed after implementation
+  // Here, implement any actions or responses required upon receiving the message
+}
