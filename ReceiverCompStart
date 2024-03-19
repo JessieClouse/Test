@@ -1,6 +1,7 @@
 //Receiver Competition Start (Adjusted to work for Mega instead of UNO)
 //APC RX to Mega TX (18)
 //APC TX to Mega RX (19)
+//Use ground and voltage pins of pin 19
 
 
 bool startMessageReceived = false; // Flag to ensure message is processed only once
