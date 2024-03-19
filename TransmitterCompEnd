@@ -2,7 +2,7 @@
 //Still needs to be modified to represent MEGA code instead of UNO code
 //Should be modified correctly now.
 
-bool startMessageSent = false; // Flag to keep track of message status
+bool endMessageSent = false; // Flag to keep track of message status
 
 void setup() {
   Serial1.begin(9600); // Initialize the hardware serial port Serial1 for APC220
@@ -10,9 +10,9 @@ void setup() {
 
 void loop() {
   // Check if the message has not been sent yet
-  if (!startMessageSent) {
+  if (!endMessageSent) {
     competitionEndSent();
-    startMessageSent = true; // Set the flag to true after sending the message
+    endMessageSent = true; // Set the flag to true after sending the message
   }
 
   // After sending the message, the rest of the loop will do nothing.
