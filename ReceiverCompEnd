@@ -1,3 +1,9 @@
+//FOR Wall-IEE:
+// Gray - Ground
+// Orange - VCC
+// Yellow - APC RX to Mega TX (18) 
+// Blue - APC TX to Mega RX (19)
+//
 //Receive Comp End
 //APC RX to Mega TX (18)
 //APC TX to Mega RX (19)
