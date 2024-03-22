@@ -1,0 +1,29 @@
+//In case finished first:
+//Wall-IEEE Transmits
+//
+// Gray - Ground
+// Orange - VCC
+// Yellow - APC RX to Mega TX (18) 
+// Blue - APC TX to Mega RX (19)
+
+bool efMessageSent = false; //Flag to track if this message has been sent
+
+void setup() {
+  Serial1.begin(9600); //Initialize Serial1 for communication with APC220 using pins 18 and 19
+}
+
+void loop() {
+  //Will check if the message has not been sent yet
+  if (!efMessageSent) {
+    earlyFinishSent(); //Send the early finish message
+    efMessageSent = true; //Set the flag to true to avoid resending.
+  }
+
+  //Other code from Wall-IEEE
+}
+
+//Function containing early finish message
+void earlyFinishSent() {
+  Serial1.println("Finished Early"); //Used for debugging
+  //Add logic here if/when needed.
+}
