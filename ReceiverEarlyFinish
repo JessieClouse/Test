@@ -1,0 +1,34 @@
+//In the case of Wall-IEEE early finish
+//
+//FOR Rock-It Bot
+// Black - Ground
+// Red - VCC
+// White - APC RX to Mega TX (18) 
+// Green - APC TX to Mega RX (19)
+
+
+bool efMessageReceived = false; //Flag ensuring message is processed only one time
+
+void setup() {
+  Serial.begin(9600); //Establishes serial communication for debugging
+  Serial1.begin(9600); //Initializes Serial1 for APC220 communication
+}
+
+void loop() {
+  if (!efMessageReceived && Serial1.available()) {
+    String incoming = Serial1.readStringUntil('\n'); 
+    incoming.trim();
+
+    //debug print the incoming message
+    Serial.println(incoming);
+
+    if (incoming == "Finished early") {
+      // Add logic here to bypass sending the "CompEnd" signal
+
+      efMessageReceived = true; //Set flag to true to acoid processing this signal anymore times
+    }
+  }
+
+//Rest of code logic to contiue here.
+
+}
