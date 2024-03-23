@@ -1,0 +1,58 @@
+// Wall-IEE Transmitter and Receiver Combined Code
+//
+// Wiring Instructions:
+// Gray - Ground
+// Orange - VCC
+// Yellow - APC RX to Mega TX (18)
+// Blue - APC TX to Mega RX (19)
+
+bool startMessageSent = false; // Flag for competition start message
+bool efMessageSent = false;    // Flag for early finish message
+bool endMessageReceived = false; // Flag for competition end message
+
+void setup() {
+  Serial.begin(9600);  // Start serial communication for debugging
+  Serial1.begin(9600); // Initialize Serial1 for APC220 communication
+}
+
+void loop() {
+  // Check and send competition start message if not sent yet
+  if (!startMessageSent) {
+    competitionStartSent();
+    startMessageSent = true;
+  }
+
+  // Check and send early finish message if not sent yet
+  if (!efMessageSent) {
+    earlyFinishSent();
+    efMessageSent = true;
+  }
+
+  // Check for and process the competition end message
+  if (!endMessageReceived && Serial1.available()) {
+    String incomingMessage = Serial1.readStringUntil('\n');
+    incomingMessage.trim(); // Trim whitespace and newline characters
+
+    if (incomingMessage.equals("We are pressing the button now")) {
+      competitionEndReceived();
+      endMessageReceived = true;
+    }
+  }
+
+  // Place additional repetitive tasks here, if any
+}
+
+void competitionStartSent() {
+  Serial1.println("COMPETITION_START");
+  // Additional actions for competition start
+}
+
+void earlyFinishSent() {
+  Serial1.println("Finished Early");
+  // Additional actions for early finish
+}
+
+void competitionEndReceived() {
+  Serial.println("Message received: We are pressing the button now");
+  // Actions upon competition end message reception
+}
